@@ -85,7 +85,7 @@ public class UI
         do 
         {
             try {
-                option = promptString("Introduce una opción:\n1) Mostrar usuarios.\n2) Registrar un usuario.\n3) Editar un usuario.\n4) Remover un usuario.");
+                option = promptString("Introduce una opción:\n0) Salir.\n1) Mostrar usuarios.\n2) Registrar un usuario.\n3) Editar un usuario.\n4) Remover un usuario.");
                 
                 switch (option)
                 {
@@ -94,11 +94,29 @@ public class UI
                         break;
                     
                     case "1":
-                        PlataformaStreaming.display_from_list();
+                        PlataformaStreaming.display();
                         break;
                     
                     case "2":
                         PlataformaStreaming.create();
+                        break;
+                    
+                    case "3":
+                        PlataformaStreaming.display();
+                        int id = promptInteger("Introduce el ID del usuario:");
+
+                        PlataformaStreaming.edit_vehiculo(id);
+                        break;
+                    
+                    case "4":
+                        PlataformaStreaming.display();
+                        id = promptInteger("Introduce el ID del usuario:");
+
+                        PlataformaStreaming.remove(id);
+                        break;
+                    
+                    default:
+                        System.out.println("Error: opción inválida. Vuelve a intentar.");
                         break;
                 }
             } catch (Exception e) {
