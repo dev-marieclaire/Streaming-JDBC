@@ -2,6 +2,8 @@ package Streaming;
 
 import java.util.ArrayList;
 
+import models.UI;
+
 public class PlataformaStreaming {
     private static ArrayList<CuentaUsuario> listaUsuarios = new ArrayList<CuentaUsuario>();
 
@@ -37,6 +39,12 @@ public class PlataformaStreaming {
             for (CuentaUsuario usuario : usuarios)
                 add(usuario);
         else System.out.println("La lista está vacía.");
+    }
+
+    public static void create()
+    {
+        CuentaUsuario usr = UI.promptUsuario();
+        add(usr);
     }
 
     public static ArrayList<CuentaUsuario> getListaUsuarios()

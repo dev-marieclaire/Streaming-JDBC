@@ -9,10 +9,11 @@ public abstract class CuentaUsuario {
     // Añadiendo Plan dentro de la clase abstracta.
     private iPlanSuscripcion planSuscripcion;
 
-    public CuentaUsuario(String eMail, Integer mesesActivo, iPlanSuscripcion planSuscripcion)
+    public CuentaUsuario(String eMail, Integer mesesActivo, Character tipo, iPlanSuscripcion planSuscripcion)
     {
         this.eMail = eMail;
         this.mesesActivo = mesesActivo;
+        this.tipo = tipo;
         this.planSuscripcion = planSuscripcion;
     }
 
