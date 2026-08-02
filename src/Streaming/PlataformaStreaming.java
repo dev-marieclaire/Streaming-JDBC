@@ -13,6 +13,32 @@ public class PlataformaStreaming {
         listaUsuarios.add(usuario);
     }
 
+    public static boolean email_exists_in_list(String mail)
+    { return listaUsuarios.stream().anyMatch(u -> u.geteMail().equals(mail)); }
+
+    public static void display_from_list()
+    {
+        if (listaUsuarios.size() > 0)
+            for (CuentaUsuario usuario : listaUsuarios)
+                usuario.display();
+    }
+
+    public static void add(CuentaUsuario usuario)
+    {
+        if (!email_exists_in_list(usuario.geteMail()))
+        {
+            registrarUsuario(usuario);
+        }
+    }
+
+    public static void bulk_add(ArrayList<CuentaUsuario> usuarios)
+    {
+        if (usuarios.size() > 0)
+            for (CuentaUsuario usuario : usuarios)
+                add(usuario);
+        else System.out.println("La lista está vacía.");
+    }
+
     public static ArrayList<CuentaUsuario> getListaUsuarios()
     { return listaUsuarios; }
 
