@@ -68,9 +68,13 @@ public abstract class CuentaUsuario {
 
                 if (rs.next()) this.id = rs.getInt(1);
 
+                rs.close();
+                con.close();
+
                 return queryExecStatus;
             }
 
+            con.close();
             return queryExecStatus;
         }
     }
@@ -118,10 +122,9 @@ public abstract class CuentaUsuario {
                     this.deuda = ObtenerTotalPagar();
                 }
                 if (tipo != null) this.tipo = tipo;
-
-                return queryExecStatus;
             }
 
+            con.close();
             return queryExecStatus;
         }
     }
@@ -132,7 +135,9 @@ public abstract class CuentaUsuario {
         {
             PreparedStatement statement = con.prepareStatement("delete from Usuario where id = ?");
             statement.setInt(1, this.id);
-            return statement.executeUpdate();
+            int queryExecStatus = statement.executeUpdate();
+            con.close();
+            return queryExecStatus;
         }
     }
 

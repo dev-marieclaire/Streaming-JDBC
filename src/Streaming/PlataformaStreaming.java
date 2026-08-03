@@ -174,10 +174,13 @@ public class PlataformaStreaming {
 
                     usuarios.add(usr);
                 }
+
+                rs.close();
             }
             catch (Exception e)
             { System.out.println("No se pudo seleccionar la información: " + e.toString()); }
             
+            con.close();
             return usuarios;
         }
     }
