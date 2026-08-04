@@ -85,7 +85,7 @@ public class UI
         do 
         {
             try {
-                option = promptString("Introduce una opción:\n0) Salir.\n1) Mostrar usuarios.\n2) Registrar un usuario.\n3) Editar un usuario.\n4) Remover un usuario.");
+                option = promptString("Introduce una opción:\n0) Salir.\n1) Mostrar usuarios.\n2) Registrar un usuario.\n3) Editar un usuario.\n4) Remover un usuario.\n5) Ver estadísticas.");
                 
                 switch (option)
                 {
@@ -113,6 +113,10 @@ public class UI
                         id = promptInteger("Introduce el ID del usuario:");
 
                         PlataformaStreaming.remove(id);
+                        break;
+
+                    case "5":
+                        PlataformaStreaming.display_stats();
                         break;
                     
                     default:

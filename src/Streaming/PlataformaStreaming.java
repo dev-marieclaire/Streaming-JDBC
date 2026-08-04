@@ -11,8 +11,8 @@ import models.UI;
 public class PlataformaStreaming {
     private static ArrayList<CuentaUsuario> listaUsuarios = new ArrayList<CuentaUsuario>();
 
-    PlataformaStreaming(ArrayList<CuentaUsuario> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
+    PlataformaStreaming(ArrayList<CuentaUsuario> lista) {
+        listaUsuarios = lista;
     }
 
     public static void registrarUsuario(CuentaUsuario usuario){
@@ -30,6 +30,8 @@ public class PlataformaStreaming {
         if (listaUsuarios.size() > 0)
             for (CuentaUsuario usuario : listaUsuarios)
                 usuario.display();
+        UI.drawLine(64, '-');
+        System.out.println();
     }
 
     public static void refresh_list() throws Exception
@@ -183,6 +185,42 @@ public class PlataformaStreaming {
             con.close();
             return usuarios;
         }
+    }
+
+    public static ArrayList<Estadisticas> get_stats() throws Exception
+    {
+        try (Connection con = Connman.getConnection())
+        {
+            PreparedStatement statement = con.prepareStatement("select tipo,COUNT(id) as total from Usuario group by tipo");
+
+            ArrayList<Estadisticas> estadisticas = new ArrayList<>();
+
+            try (ResultSet rs = statement.executeQuery())
+            {
+                while (rs.next())
+                {
+                    Estadisticas e = new Estadisticas(rs.getString("tipo").charAt(0), rs.getInt("total"));
+                    estadisticas.add(e);
+                }
+
+                rs.close();
+            }
+            catch (Exception e)
+            { System.out.println("No se pudo seleccionar la información: " + e.toString()); }
+
+            con.close();
+            return estadisticas;
+        }
+    }
+
+    public static void display_stats() throws Exception
+    {
+        ArrayList<Estadisticas> estadisticas = get_stats();
+        if (estadisticas.size() > 0)
+            for (Estadisticas e : estadisticas) e.display();
+        else System.out.println("La lista debe contener datos.");
+        UI.drawLine(64, '-');
+        System.out.println();
     }
 
     // public static ArrayList<CuentaUsuario> getListaUsuarios() throws Exception
