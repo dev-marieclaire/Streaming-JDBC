@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class PlataformaStreaming {
     private static ArrayList<CuentaUsuario> listaUsuarios = new ArrayList<CuentaUsuario>();
 
-    PlataformaStreaming(ArrayList<CuentaUsuario> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
+    PlataformaStreaming(ArrayList<CuentaUsuario> lista) {
+        listaUsuarios = lista;
     }
 
     public static void registrarUsuario(CuentaUsuario usuario){
@@ -21,6 +21,8 @@ public class PlataformaStreaming {
         if (listaUsuarios.size() > 0)
             for (CuentaUsuario usuario : listaUsuarios)
                 usuario.display();
+        UI.drawLine(64, '-');
+        System.out.println();
     }
 
     public static void add(CuentaUsuario usuario)
@@ -65,4 +67,64 @@ public class PlataformaStreaming {
             System.out.println("No hay ningún registro.");
         }
     }
+<<<<<<< Updated upstream
+=======
+
+    public static ArrayList<Estadisticas> get_stats() throws Exception
+    {
+        try (Connection con = Connman.getConnection())
+        {
+            PreparedStatement statement = con.prepareStatement("select tipo,COUNT(id) as total from Usuario group by tipo");
+
+            ArrayList<Estadisticas> estadisticas = new ArrayList<>();
+
+            try (ResultSet rs = statement.executeQuery())
+            {
+                while (rs.next())
+                {
+                    Estadisticas e = new Estadisticas(rs.getString("tipo").charAt(0), rs.getInt("total"));
+                    estadisticas.add(e);
+                }
+
+                rs.close();
+            }
+            catch (Exception e)
+            { System.out.println("No se pudo seleccionar la información: " + e.toString()); }
+
+            con.close();
+            return estadisticas;
+        }
+    }
+
+    public static void display_stats() throws Exception
+    {
+        ArrayList<Estadisticas> estadisticas = get_stats();
+        if (estadisticas.size() > 0)
+            for (Estadisticas e : estadisticas) e.display();
+        else System.out.println("La lista debe contener datos.");
+        UI.drawLine(64, '-');
+        System.out.println();
+    }
+
+    // public static ArrayList<CuentaUsuario> getListaUsuarios() throws Exception
+    // { return listaUsuarios; }
+
+    // public static void Reporte (){
+    //     double dineroTotal = 0.0;
+
+    //     if (listaUsuarios.size() > 0)
+    //     {
+    //         System.out.println("======= REPORTE DE CUENTAS DE USUARIO =======");
+            
+    //         display();
+
+    //         System.out.println("===========================");
+    //         System.out.println("Dinero total recaudado: "+dineroTotal);
+    //     }
+    //     else
+    //     {
+    //         System.out.println("No hay ningún registro.");
+    //     }
+    // }
+>>>>>>> Stashed changes
 }

@@ -22,6 +22,7 @@ public abstract class CuentaUsuario {
             "ID: %d\n"
             + "e-mail: %s\n"
             + "meses activo: %d\n"
+<<<<<<< Updated upstream
             + "tipo: %s\n",
             id, eMail, mesesActivo,tipo
         ) : String.format(
@@ -29,6 +30,17 @@ public abstract class CuentaUsuario {
             + "meses activo: %d\n"
             + "tipo: %s\n",
             eMail, mesesActivo,tipo
+=======
+            + "tipo: %s\n"
+            + "deuda: %f",
+            id, eMail, mesesActivo, tipo, deuda
+        ) : String.format(
+            "e-mail: %s\n"
+            + "meses activo: %d\n"
+            + "tipo: %s\n"
+            + "deuda: %f",
+            eMail, mesesActivo, tipo, deuda
+>>>>>>> Stashed changes
         );
     }
 
